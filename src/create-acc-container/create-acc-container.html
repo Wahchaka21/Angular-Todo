@@ -1,0 +1,42 @@
+<div class="h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 w-[500px] rounded shadow">
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Entrer votre email :</label>
+        <input
+          [(ngModel)]="email"
+          name="email"
+          id="email"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="email"
+          required />
+      </div>
+
+      <div class="pt-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Entrer votre mot de passe :</label>
+        <input
+          [(ngModel)]="password"
+          name="password"
+          id="password"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="password"
+          required />
+      </div>
+
+      <div class="pt-3">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Entrer votre pseudo :</label>
+        <input
+          [(ngModel)]="username"
+          name="username"
+          id="username"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="text"
+          required />
+      </div>
+
+      <div class="flex justify-center pt-6">
+        <app-validator-button></app-validator-button>
+      </div>
+    </form>
+  </div>
+</div>
