@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../user-service/user-service';
 import { ValidatorButton } from '../validator-button/validator-button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-acc-container',
@@ -15,7 +16,7 @@ export class CreateAccContainer {
   password = ""
   username = ""
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   onSubmit() {
     const user = {
@@ -29,6 +30,7 @@ export class CreateAccContainer {
     this.userService.registerUser(user).subscribe({
       next: (res) => {
         console.log("Succès :", res)
+        this.router.navigate(['/login'])
       },
       error: (err) => {
         console.error("Erreur :", err)
