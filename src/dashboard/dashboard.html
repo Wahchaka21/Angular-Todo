@@ -1,49 +1,41 @@
 <p>dashboard works!</p>
 <p>le user est connecté</p>
 
-<div class="dashboard">
-  <header>
+<div class="p-5">
+  <header class="flex justify-between items-center mb-8">
     <h1>Dashboard</h1>
-    <button (click)="logout()">Déconnexion</button>
+    <button (click)="logout()" class="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">Déconnexion</button>
   </header>
 
   <main>
     @if (isLoggedIn()) {
       <p>Vous êtes connecté !</p>
-      <button (click)="loadData()">Charger des données</button>
+      <button (click)="loadData()" class="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">Charger des données</button>
 
       @if (data) {
-        <pre>{{ data | json }}</pre>
+        <pre class="bg-gray-100 p-4 rounded overflow-auto">{{ data | json }}</pre>
       }
     }
   </main>
 </div>
+<div class="mb-8 ml-5">
+  <input [(ngModel)]="newTaskLabel" class="border-2 border-black mr-4" placeholder="Titre de la tâche">
+  <button (click)="addTask()" class="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">Créer</button>
+</div>
 
-<style>
-  .dashboard {
-    padding: 20px;
-  }
 
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
+<ul class="ml-5">
+  <li *ngFor="let task of tasks">
+    <div *ngIf="editingTaskId !== task.id">
+      <span class="mr-4 px-20 py-2 border-2 border-black mb-8">{{ task.label }}</span>
+      <button class="pr-4 px-4 py-2 mr-4 bg-blue-600 text-white rounded cursor-pointer" (click)="startEdit(task)">Modifier</button>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer" (click)="deleteTask(task.id)">Supprimer</button>
+    </div>
 
-  button {
-    padding: 8px 16px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  pre {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 4px;
-    overflow: auto;
-  }
-</style>
+    <div *ngIf="editingTaskId === task.id">
+      <input class="border-2 border-black mr-4" [(ngModel)]="editedTaskLabel">
+      <button class="px-4 py-2 mr-4 bg-blue-600 text-white rounded cursor-pointer" (click)="confirmEdit(task)">Valider</button>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer" (click)="cancelEdit()">Annuler</button>
+    </div>
+  </li>
+</ul>
